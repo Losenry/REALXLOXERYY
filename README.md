@@ -1,1 +1,1 @@
-# this repository collect all of my old projects!
+# this repository collect script projects!
