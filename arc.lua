@@ -1,4 +1,4 @@
--- this code was using arc spehora with Aero Nevoris Edition (v1.0.2 Beta Dev)
+-- this code was using arc sephora with Aero Nevoris Edition (v1.0.2 Beta Dev)
 -- WARNING: it not obfuscate code
 -- hint: this code if you can solve it you will get Sephora Discord Server Invite Link!
 
