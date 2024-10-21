@@ -1,3 +1,11 @@
+getgenv().InterfaceSett = {
+    ColorSec1 = Color3.fromRGB(186, 164, 57), -- เปลี่ยนพวกสีตรงกรอบ
+    ColorSec2 = Color3.fromRGB(175, 155, 58), -- เปลี่ยนสี toggle logo, slidebar
+    WinBarSec1 = "Luxury Hub V3.0", -- เปลี่ยนชื่อ win menu
+    WinBarDate = 2, -- เปลี่ยนรูปแบบแสดงวัน
+    InterfaceLogo = 16796144919 -- โลโก้
+}
+
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 
