@@ -800,14 +800,21 @@ function lib:Win(name)
 					pcall(options.callback,TextBox.Text)
 				end)
 			end
-			function main:Slider(text,min,max,set,callback)
-				if tonumber(set) > tonumber(max) then
-					set = (max)
+			function main:AddSlider(name,options)
+
+				local visualTitle = name or "Slider : nil"
+				local visualMin = options.min or 0
+				local visualMax = options.max or 100
+				local visualDefault = options.value or 50
+				local visualcallback = options.callback or function() end
+
+				if tonumber(visualDefault) > tonumber(visualMax) then
+					visualDefault = (visualMax)
 				end                
-				if tonumber(set) < tonumber(min) then
-					set = (max)
+				if tonumber(visualDefault) < tonumber(visualMin) then
+					visualDefault = (visualMax)
 				end
-				callback(set)
+				options.callback(visualDefault)
 
 				local Slider = Instance.new("Frame")
 				Slider.Name = "Slider"
@@ -824,7 +831,7 @@ function lib:Win(name)
 				SliderTitle.Position = UDim2.new(0, 10, 0, 0)
 				SliderTitle.Size = UDim2.new(0, 150, 0, 23)
 				SliderTitle.Font = Enum.Font.Gotham
-				SliderTitle.Text = text
+				SliderTitle.Text = visualTitle
 				SliderTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 				SliderTitle.TextSize = 12.000
 				SliderTitle.TextTransparency = 0.500
@@ -838,7 +845,7 @@ function lib:Win(name)
 				Amount.Position = UDim2.new(1, -47, 0, 0)
 				Amount.Size = UDim2.new(0, 47, 0, 20)
 				Amount.Font = Enum.Font.Gotham
-				Amount.Text = set
+				Amount.Text = visualDefault
 				Amount.TextColor3 = Color3.fromRGB(255, 255, 255)
 				Amount.TextSize = 12.000
 
@@ -869,7 +876,7 @@ function lib:Win(name)
 					TweenService:Create(SliderTitle, TweenInfo.new(0.3), {TextTransparency = 0.5}):Play()
 				end)
 
-				Fill:TweenSize(UDim2.new((Amount.Text or 0) / max, 0, 0, 5), "Out", "Sine", 0.2, true)
+				Fill:TweenSize(UDim2.new((Amount.Text or 0) / visualMax, 0, 0, 5), "Out", "Sine", 0.2, true)
 				Slider.MouseEnter:Connect(function()
 					local function move(input)
 						local pos = UDim2.new(
@@ -880,9 +887,9 @@ function lib:Win(name)
 						)
 
 						Fill:TweenSize(pos, "Out", "Sine", 0.2, true)
-						local value = math.floor(((pos.X.Scale * max) / max) * (max - min) + min)
+						local value = math.floor(((pos.X.Scale * visualMax) / visualMax) * (visualMax - visualMin) + visualMin)
 						Amount.Text = tostring(value)
-						callback(value)
+						options.callback(value)
 					end
 					local dragging = false
 					Bar.InputBegan:Connect(
@@ -909,17 +916,17 @@ function lib:Win(name)
 
 					Amount.FocusLost:Connect(function()
 						if Amount.Text == "" then
-							Amount.Text = set
+							Amount.Text = visualDefault
 						end
-						if tonumber(Amount.Text) > max then
-							Amount.Text = max
+						if tonumber(Amount.Text) > visualMax then
+							Amount.Text = visualMax
 						end
-						if tonumber(Amount.Text) < min then
-							Amount.Text = min
+						if tonumber(Amount.Text) < visualMin then
+							Amount.Text = visualMin
 						end
-						Fill:TweenSize(UDim2.new((Amount.Text or 0) / max, 0, 0, 5), "Out", "Sine", 0.2, true)
-						Amount.Text = tostring(Amount.Text) -- and math.floor( (Amount.Text / max) * (max - min) + min) )
-						pcall(callback, Amount.Text)
+						Fill:TweenSize(UDim2.new((Amount.Text or 0) / visualMax, 0, 0, 5), "Out", "Sine", 0.2, true)
+						Amount.Text = tostring(Amount.Text) -- and math.floor( (Amount.Text / visualMax) * (visualMax - visualMin) + visualMin) )
+						pcall(options.callback, Amount.Text)
 					end)
 				end)
 			end
