@@ -1289,3 +1289,4 @@ function lib:Win(name)
 	end
 	return tab
 end
+return lib
