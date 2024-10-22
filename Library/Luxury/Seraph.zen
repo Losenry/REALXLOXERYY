@@ -1,3 +1,5 @@
+-- UPDATE 23/10/2024 #1
+
 repeat task.wait() until game:IsLoaded()
 
 local UserInputService = game:GetService("UserInputService")
@@ -742,7 +744,7 @@ function Library:Init()
 	Ontime.TextSize = 23.000
 	Ontime.TextWrapped = true
 	Ontime.TextYAlignment = Enum.TextYAlignment.Top
-	Ontime.Text = "System RunTime"
+	Ontime.Text = "Script RunTime"
     Ontime.TextTransparency = 1
 
     
@@ -778,226 +780,113 @@ function Library:Init()
     end)
 
     local State = false
+    local StateWave = 0
     Logo2.MouseButton1Click:connect(function()
-        if State == false then
-            Date.Text = '> Status'
-            TitlePage(1)
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Rotation = -90.5}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Position = UDim2.new(0.3200, 0, 0.134844989, 0)}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {ImageTransparency = 0.5}
-            ):Play()
-            wait(2.5)
-            TweenService:Create(
-                Ontime,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 0}
-            ):Play()
-            wait(0.75)
-            TweenService:Create(
-                TimeStatus,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 0}
-            ):Play()
-            State = true
-        elseif State == true then
-            Date.Text = "> General"
-            TweenService:Create(
-                TimeStatus,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 1}
-            ):Play()
-            wait(0.75)
-            TweenService:Create(
-                Ontime,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 1}
-            ):Play()
-            wait(2.5)
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {ImageTransparency = 0.00}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Rotation = -3.5}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Position = UDim2.new(0.634613931, 0, 0.134844989, 0)}
-            ):Play()
-            Date.Text = GetDate(getgenv().Settings.DateType)
-            wait(2.7)
-            TitlePage(0)
-            State = false
-        end
+		if State == false then
+			Date.Text = '> Status'
+			TitlePage(1)
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Rotation = -90.5}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Position = UDim2.new(0.3200, 0, 0.134844989, 0)}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{ImageTransparency = 0.5}
+			):Play()
+			wait(2.5)
+			TweenService:Create(
+				Ontime,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 0}
+			):Play()
+			wait(0.75)
+			TweenService:Create(
+				TimeStatus,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 0}
+			):Play()
+			State = true
+			StateWave = 2
+		elseif State == true then
+			Date.Text = "> General"
+			TweenService:Create(
+				TimeStatus,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 1}
+			):Play()
+			wait(0.75)
+			TweenService:Create(
+				Ontime,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 1}
+			):Play()
+			wait(2.5)
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{ImageTransparency = 0.00}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Rotation = -3.5}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Position = UDim2.new(0.634613931, 0, 0.134844989, 0)}
+			):Play()
+			Date.Text = GetDate(getgenv().Settings.DateType)
+			wait(2.7)
+			TitlePage(0)
+			State = false
+		end
     end)
 
     Logo.MouseButton1Click:Connect(function()
-        if State == true then
-            Date.Text = "> General"
-            TweenService:Create(
-                TimeStatus,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 1}
-            ):Play()
-            wait(0.75)
-            TweenService:Create(
-                Ontime,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {TextTransparency = 1}
-            ):Play()
-            wait(2.5)
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {ImageTransparency = 0.00}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Rotation = -3.5}
-            ):Play()
-            TweenService:Create(
-                Logo2,
-                TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-                {Position = UDim2.new(0.634613931, 0, 0.134844989, 0)}
-            ):Play()
-            Date.Text = GetDate(getgenv().Settings.DateType)
-            wait(2.7)
-            TitlePage(0)
-            State = false
-        end
+		StateWave = StateWave + 1
+		if State == true then
+			Date.Text = "> General"
+			TweenService:Create(
+				TimeStatus,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 1}
+			):Play()
+			wait(0.75)
+			TweenService:Create(
+				Ontime,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{TextTransparency = 1}
+			):Play()
+			wait(2.5)
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{ImageTransparency = 0.00}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Rotation = -3.5}
+			):Play()
+			TweenService:Create(
+				Logo2,
+				TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+				{Position = UDim2.new(0.634613931, 0, 0.134844989, 0)}
+			):Play()
+			Date.Text = GetDate(getgenv().Settings.DateType)
+			wait(2.7)
+			TitlePage(0)
+			State = false
+		end
     end)
-
-    -- ClickWave = 0
-    -- State2 = false
-    -- Logo.MouseButton1Click:connect(function()
-    --     ClickWave = ClickWave + 1
-    --     Date.Text = ClickWave
-    --     if ClickWave == 2 then
-    --         Date.Text = 'Settings'
-    --         TweenService:Create(
-    --             Logo,
-    --             TweenInfo.new(6, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-    --             {Rotation = 720}
-    --         ):Play()
-    --         if State2 == false then
-    --             TitlePage(1)
-    --             TweenService:Create(
-    --                 Logo2,
-    --                 TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-    --                 {Rotation = -183.5}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 Logo2,
-    --                 TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-    --                 {Position = UDim2.new(0.0471204184, 0, 0.134844989, 0)}
-    --             ):Play()
-    --             wait(2.7)
-    --             KillUiFrame.Visible = true
-    --             TweenService:Create(
-    --                 KillUiFrame,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut),
-    --                 {BackgroundTransparency = 0}
-    --             ):Play()
-    --             wait(0.75)
-    --             TweenService:Create(
-    --                 KillUiFrameStroke,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {Transparency = 0.5}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 KillUi,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {TextTransparency = 0}
-    --             ):Play()
-    --             RejoinUiFrame.Visible = true
-    --             TweenService:Create(
-    --                 RejoinUiFrame,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut),
-    --                 {BackgroundTransparency = 0}
-    --             ):Play()
-    --             wait(0.75)
-    --             TweenService:Create(
-    --                 RejoinUiFrameStroke,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {Transparency = 0.5}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 RejoinButton,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {TextTransparency = 0}
-    --             ):Play()
-    --             State2 = true
-    --             ClickWave = ClickWave - 2
-    --         elseif State2 == true then
-    --             Date.Text = 'Exit Settings'
-    --             TweenService:Create(
-    --                 Logo2,
-    --                 TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-    --                 {Rotation = -3.5}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 Logo2,
-    --                 TweenInfo.new(2.5, Enum.EasingStyle.Back, Enum.EasingDirection.In),
-    --                 {Position = UDim2.new(0.634613931, 0, 0.134844989, 0)}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 KillUiFrame,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut),
-    --                 {BackgroundTransparency = 1}
-    --             ):Play()
-    --             wait(0.75)
-    --             TweenService:Create(
-    --                 KillUiFrameStroke,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {Transparency = 1}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 KillUi,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {TextTransparency = 1}
-    --             ):Play()
-    --             KillUiFrame.Visible = false
-    --             TweenService:Create(
-    --                 RejoinUiFrame,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut),
-    --                 {BackgroundTransparency = 1}
-    --             ):Play()
-    --             wait(0.75)
-    --             TweenService:Create(
-    --                 RejoinUiFrameStroke,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {Transparency = 1}
-    --             ):Play()
-    --             TweenService:Create(
-    --                 RejoinButton,
-    --                 TweenInfo.new(0.3, Enum.EasingStyle.Quart, Enum.EasingDirection.In),
-    --                 {TextTransparency = 1}
-    --             ):Play()
-    --             RejoinUiFrame.Visible = false
-    --             wait(2.7)
-    --             TitlePage(0)
-    --             State2 = false
-    --             ClickWave = 0
-    --             Date.Text = GetDate(getgenv().Settings.DateType)
-    --         end
-    --     end
-    -- end)
 
     function LogoRotation()
         -- Logo 
@@ -1391,7 +1280,6 @@ function Library:Init()
 				Name.Visible = false
 				Hub.Visible = false
 				DiscordFrame.Visible = false
-				KillUiFrame.Visible = false
 				Ontime.Visible = false
 				TimeStatus.Visible = false
 			else
@@ -1402,6 +1290,8 @@ function Library:Init()
 				Name.Visible = true
 				Hub.Visible = true
 				DiscordFrame.Visible = true
+				Ontime.Visible = true
+				TimeStatus.Visible = true
 			end
 		end)		
 
