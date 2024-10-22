@@ -1376,12 +1376,12 @@ function Library:Init()
                         {TextTransparency = 0}
                     ):Play()
                 end
-            end
+            end 
         end)
 
 		UIPageLayout:GetPropertyChangedSignal("CurrentPage"):Connect(function()
 			local currentPage = UIPageLayout.CurrentPage
-		
+			
 			-- Check if the current page is the Settings tab
 			if currentPage.Name == "Settings_MainPage" then
 				-- Make Tab1 visible when on the Settings tab
@@ -1392,6 +1392,8 @@ function Library:Init()
 				Hub.Visible = false
 				DiscordFrame.Visible = false
 				KillUiFrame.Visible = false
+				Ontime.Visible = false
+				TimeStatus.Visible = false
 			else
 				-- Hide Tab1 when not on the Settings tab
 				Tab1.Visible = true
