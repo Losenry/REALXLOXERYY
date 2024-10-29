@@ -87,6 +87,34 @@ Alice = function()
         return true
     end
 
+    Seraph = function(args)
+        P1 = "2ER4PH"
+        P2 = P1.."/Grace.txt"
+        P3 = P1.."/Logs.txt"
+
+        if not isfolder(P1) then
+            makefolder(P1)
+        end
+
+        if not isfile(P2) then
+            writefile(P2,0)
+        end
+
+        if not isfile(P3) then
+            writefile(P3,"nil")
+        end
+
+        local Arm3 = readfile(P2)
+        local Arm4 = Arm3 + 1
+        local Arm5 = writefile(P2,Arm4)
+        if args then
+            local Arm6 = writefile(P3,"Success")
+        else
+            local Arm6 = writefile(P3,"Error")
+        end
+        warn("["..Arm4.."] : Success")
+    end
+
     local success =
         pcall(
         function()
@@ -113,11 +141,12 @@ Alice = function()
                         string.reverse(Arm0) == Aleonor and
                         string.reverse(Aleonor) == Arm0
                     then
-                        warn("[Success]")
+                        Seraph(true) 
                         Adreno = true
                     end
                 end
             else
+                Seraph(false) 
                 warn("Security validation failed")
             end
         end
@@ -125,6 +154,7 @@ Alice = function()
 
     if not success then
         warn("Critical security error")
+        Seraph(false) 
         task.wait(2)
         game.Players.LocalPlayer:Kick("\n Critical Security Error")
     end
@@ -135,5 +165,8 @@ Alice = function()
         string.reverse(Arm0) == Aleonor and
         string.reverse(Aleonor) == Arm0 then
         return "N3XT G3NERAT1ON 0F S3RAPH1C SCR1PT"
+    else
+        Seraph(false) 
+        game.Players.LocalPlayer:Kick("\n Patch!!")
     end
 end
