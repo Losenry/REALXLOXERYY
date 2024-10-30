@@ -1,4 +1,4 @@
---#2
+-- #3
 
 -- Check game loadded 
 repeat wait()
@@ -290,6 +290,7 @@ end
 mainlib.window = function(options)
     local Title = options.Title
     local Descriptions = options.Desc
+    local GameLogo = options.GameLogo or game.PlaceId
     local Logo = options.Logo
     local aleonor = {};
     local seraph = {} ; 
@@ -668,7 +669,6 @@ mainlib.window = function(options)
         if table.find(Xercuxis, true) then
             warn('successfully load all assets!')
         end
-        return raphael
     end
     raphael.main() 
 
@@ -677,11 +677,24 @@ mainlib.window = function(options)
     local Scrollingbar = Instance.new("ScrollingFrame")
     local ScrollingbarUIListLayout = Instance.new("UIListLayout")
     local ScrollingbarUIPadding = Instance.new("UIPadding")
+
+    local ScrollUpdatebarUICorner = Instance.new("UICorner")
+    local ScrollingUpdatebar = Instance.new("ScrollingFrame")
+    local ScrollingUpdatebarUIListLayout = Instance.new("UIListLayout")
+    local ScrollingUpdatebarUIPadding = Instance.new("UIPadding")
+
+    local ScrollLogsbarUICorner = Instance.new("UICorner")
+    local ScrollingLogsbar = Instance.new("ScrollingFrame")
+    local ScrollingLogsbarUIListLayout = Instance.new("UIListLayout")
+    local ScrollingLogsbarUIPadding = Instance.new("UIPadding")
+
+    local Main2 = Instance.new("Frame")
+    local ContainPage = Instance.new("Frame")
     local Main2 = Instance.new("Frame")
     local ContainPage = Instance.new("Frame")
     local Folder = Instance.new("Folder")
     local UIPageLayout = Instance.new("UIPageLayout")
-
+    local General = Instance.new("Frame")
     UIPageLayout.Parent = ContainPage
     UIPageLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIPageLayout.Circular = true
@@ -774,7 +787,6 @@ mainlib.window = function(options)
 
         local name = tostring(math.random(0,9999))
         local tablogo = options.Logo or 12095230917
-
         layout = layout + 1
 
         local ButtonBar = Instance.new("Frame")
@@ -789,31 +801,18 @@ mainlib.window = function(options)
         local RightFrame = Instance.new("ScrollingFrame")
         local RightFrameUIListLayout = Instance.new("UIListLayout")
         local RightFrameUIPadding = Instance.new("UIPadding")
-        -- local TabTitle = Instance.new("TextLabel")
+        local TabTitle = Instance.new("TextLabel")
 
         ButtonBar.Name = "ButtonBar"
         ButtonBar.Parent = Scrollingbar
         ButtonBar.BackgroundColor3 = Color3.fromRGB(204, 204, 204)
         ButtonBar.BorderSizePixel = 0
         ButtonBar.Size = UDim2.new(0, 30, 0, 29)
+        ButtonBar.ClipsDescendants = true
 
         ButtonBarUICorner.CornerRadius = UDim.new(0, 4)
         ButtonBarUICorner.Name = "ButtonBarUICorner"
         ButtonBarUICorner.Parent = ButtonBar
-
-        -- TabTitle.Name = "DropdownTitle"
-        -- TabTitle.Parent = ButtonBar
-        -- TabTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-        -- TabTitle.BackgroundTransparency = 1.000
-        -- TabTitle.Position = UDim2.new(0.038984444, 0, 0, 0)
-        -- TabTitle.Size = UDim2.new(0, 183, 0, 27)
-        -- TabTitle.Font = Enum.Font.GothamBold
-        -- TabTitle.TextColor3 = Color3.fromRGB(40, 40, 40)
-        -- TabTitle.TextSize = 12.000
-        -- TabTitle.TextTransparency = 0.450
-        -- TabTitle.TextWrapped = true
-        -- TabTitle.TextXAlignment = Enum.TextXAlignment.Left
-        -- TabTitle.Text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 
 
         ButtonBarLogo.Name = "ButtonBarLogo"
@@ -825,6 +824,26 @@ mainlib.window = function(options)
         ButtonBarLogo.Size = UDim2.new(0, 25, 0, 25)
         ButtonBarLogo.Image = "http://www.roblox.com/asset/?id="..tostring(tablogo)
         ButtonBarLogo.ScaleType = Enum.ScaleType.Fit
+
+        TabTitle.Name = "TitleTabs"
+        TabTitle.Parent = ButtonBar
+        TabTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+        TabTitle.BackgroundTransparency = 1.000
+        TabTitle.Position = UDim2.new(0, 0, 0, 1)
+        TabTitle.Size = UDim2.new(0, 183, 0, 27)
+        TabTitle.Font = Enum.Font.GothamBold
+        TabTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabTitle.TextSize = 12.000
+        TabTitle.TextTransparency = 1
+        TabTitle.TextWrapped = false
+        TabTitle.TextXAlignment = Enum.TextXAlignment.Left
+        TabTitle.Text = ""
+
+        game:GetService("RunService").Stepped:Connect(function()
+            pcall(function()
+                ButtonBar.Size = UDim2.new(0,226,0,TabTitle.AbsoluteContentSize.Y + 20)
+            end)
+        end)
 
         MainPage.Name = name.."_MainPage"
         MainPage.Parent = ContainPage
@@ -898,11 +917,18 @@ mainlib.window = function(options)
                         if v:IsA("ImageButton") then
                             ZenTween(v,0.3,Enum.EasingStyle.Quart,{ImageColor3 = Color3.fromRGB(255,255,255)})
                         end
+                        if v:IsA("TextLabel") and v.Name == "TitleTabs" then
+                            ZenTween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 1})
+                            ZenTween(v,0.3,Enum.EasingStyle.Quart,{BackgroundTransparency = 1})
+                        end
                         -- if v:IsA("Frame") then
                         --     ZenTween(v,0.3,Enum.EasingStyle.Quart,{Size = UDim2.new(0, 30, 0, 29)})
                         -- end
                         ZenTween(ButtonBarLogo,0.3,Enum.EasingStyle.Quart,{ImageColor3 = Color3.fromRGB(127, 127, 127)})
                         ZenTween(ButtonBar,0.3,Enum.EasingStyle.Quart,{Size = UDim2.new(0, 80, 0, 29)})
+                        ZenTween(TabTitle,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
+                        ZenTween(TabTitle,0.3,Enum.EasingStyle.Quart,{BackgroundTransparency = 0.5})
+                        General.Visible = false
                         LeftFrame.Visible = true
                         RightFrame.Visible = true
                     end
@@ -924,9 +950,14 @@ mainlib.window = function(options)
 						if v:IsA("ImageButton") then
 							ZenTween(v,0.3,Enum.EasingStyle.Quart,{ImageColor3 = Color3.fromRGB(255,255,255)})
                         end
+                        if v:IsA("TextLabel") and v.Name == "TitleTabs" then
+                            ZenTween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 1})
+                            ZenTween(v,0.3,Enum.EasingStyle.Quart,{BackgroundTransparency = 1})
+                        end
 						ZenTween(MainScreenLogo,0.3,Enum.EasingStyle.Quart,{ImageColor3 = Color3.fromRGB(127, 127, 127)})
 						LeftFrame.Visible = false
 						RightFrame.Visible = false
+                        General.Visible = true
 						ZenTween(ButtonBar,0.3,Enum.EasingStyle.Quart,{Size = UDim2.new(0, 30, 0, 29)})
 					end
 				end
@@ -966,7 +997,7 @@ mainlib.window = function(options)
             local PageStroke = Instance.new("UIStroke")
 
             PageStroke.Parent = Page
-            PageStroke.Transparency = 0.25
+            PageStroke.Transparency = 0.85
             PageStroke.Thickness = 1
             PageStroke.Color = Color3.fromRGB(186,186,186)
 
@@ -995,6 +1026,187 @@ mainlib.window = function(options)
                 end)
             end)
         	local libcreatefunction = {}
+                libcreatefunction.updatelog = function(options)
+                    gameId = options.ID or game.PlaceId or game.GameId
+                    Title = options.Title
+                    Logs = options.Info or {}
+
+                    General.Name = "Xercuxis"
+                    General.Parent = Main2
+                    General.Active = true
+                    General.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+                    General.BackgroundTransparency = 0.500
+                    General.Position = UDim2.new(0.5, 0, 0.5, 0)
+                    General.AnchorPoint = Vector2.new(0.5, 0.5)
+                    General.Size = UDim2.new(1, 0, 1, 0)
+                    General.ClipsDescendants = true
+                    General.Visible = true
+                    conner(General,5)
+
+                    ScrollingUpdatebar.Name = "Scrollingbar"
+                    ScrollingUpdatebar.Parent = General
+                    ScrollingUpdatebar.Active = true
+                    ScrollingUpdatebar.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+                    ScrollingUpdatebar.BackgroundTransparency = 1.000
+                    ScrollingUpdatebar.BorderSizePixel = 0
+                    ScrollingUpdatebar.Size = UDim2.new(1, 0, 1, 0)
+                    ScrollingUpdatebar.ScrollBarThickness = 0
+
+                    ScrollingUpdatebarUIListLayout.Name = "ScrollingbarUIListLayout"
+                    ScrollingUpdatebarUIListLayout.Parent = ScrollingUpdatebar
+                    -- ScrollingUpdatebarUIListLayout.FillDirection = Enum.FillDirection.Horizontal
+                    ScrollingUpdatebarUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                    -- ScrollingUpdatebarUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+                    ScrollingUpdatebarUIListLayout.Padding = UDim.new(0, 5)
+
+                    ScrollingUpdatebarUIPadding.Name = "ScrollingbarUIPadding"
+                    ScrollingUpdatebarUIPadding.Parent = ScrollingUpdatebar
+                    ScrollingUpdatebarUIPadding.PaddingLeft = UDim.new(0, 10)
+                    ScrollingUpdatebarUIPadding.PaddingTop = UDim.new(0, 10)
+
+                    local FrameLogs = Instance.new("ImageLabel")
+                    FrameLogs.Name = "Xercuxis"
+                    FrameLogs.Parent = ScrollingUpdatebar
+                    FrameLogs.Active = true
+                    FrameLogs.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+                    FrameLogs.BackgroundTransparency = 0.500
+                    FrameLogs.Position = UDim2.new(0.5, 0, 0.5, 0)
+                    FrameLogs.AnchorPoint = Vector2.new(0.5, 0.5)
+                    FrameLogs.Size = UDim2.new(0, 500, 0, 170)
+                    FrameLogs.ClipsDescendants = true
+                    
+                    conner(FrameLogs,5)
+                    stroke(FrameLogs, 0.75, 1, Color3.fromRGB(233,233,233))
+                    local GameImage = Instance.new("ImageLabel")
+                    GameImage.Name = "Arrow"
+                    GameImage.Parent = FrameLogs
+                    GameImage.Active = true
+                    GameImage.AnchorPoint = Vector2.new(0.5, 0.5)
+                    GameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    GameImage.BackgroundTransparency = 0.500
+                    GameImage.Position = UDim2.new(0.112, 0, 0.33, 0)
+                    GameImage.Size = UDim2.new(0, 100, 0, 100)
+                    GameImage.Image = "http://www.roblox.com/asset/?id="
+                    GameImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                    GameImage.ImageTransparency = 0
+                    conner(GameImage,5)
+                    IrisGetImage(GameImage,gameId)
+
+                    local GameTitle = Instance.new("TextLabel")
+					GameTitle.Name = "DropdownTitle"
+					GameTitle.Parent = FrameLogs
+					GameTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+					GameTitle.BackgroundTransparency = 1.000
+					GameTitle.Position = UDim2.new(0.0114, 0, 0.65, 0)
+					GameTitle.Size = UDim2.new(0, 500, 0, 27)
+					GameTitle.Font = Enum.Font.GothamBold
+					GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+					GameTitle.TextSize = 14.000
+					GameTitle.TextTransparency = 0
+					GameTitle.TextWrapped = true
+					GameTitle.TextXAlignment = Enum.TextXAlignment.Left
+					GameTitle.Text = tostring(game:GetService("MarketplaceService"):GetProductInfo(gameId).Name)
+
+                    local GameVersion = Instance.new("TextLabel")
+					GameVersion.Name = "DropdownTitle"
+					GameVersion.Parent = FrameLogs
+					GameVersion.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+					GameVersion.BackgroundTransparency = 1.000
+					GameVersion.Position = UDim2.new(0.0114, 0, 0.8, 0)
+					GameVersion.Size = UDim2.new(0, 500, 0, 27)
+					GameVersion.FontFace = Font.fromId(12187365977)
+					GameVersion.TextColor3 = Color3.fromRGB(255, 255, 255)
+					GameVersion.TextSize = 14.000
+					GameVersion.TextTransparency = 0.450
+					GameVersion.TextWrapped = true
+					GameVersion.TextXAlignment = Enum.TextXAlignment.Left
+					GameVersion.Text = "Version : "..game:GetService("MarketplaceService"):GetProductInfo(gameId).Updated
+
+					local LineGame = Instance.new("Frame")
+
+					LineGame.Name = "LineFrame"
+					LineGame.Parent = FrameLogs
+					LineGame.Active = true
+                    LineGame.Position = UDim2.new(0.56, 0, 0.067, 0)
+					LineGame.BackgroundColor3 = getgenv().InterfaceSett["1"]["Ui Color"]
+					LineGame.BorderSizePixel = 0
+					LineGame.Size = UDim2.new(0, 1, 0, 150)
+
+                    local ChangeLogTitle = Instance.new("TextLabel")
+					ChangeLogTitle.Name = "DropdownTitle"
+					ChangeLogTitle.Parent = FrameLogs
+					ChangeLogTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+					ChangeLogTitle.BackgroundTransparency = 1.000
+					ChangeLogTitle.Position = UDim2.new(0.59, 0, 0.043, 0)
+					ChangeLogTitle.Size = UDim2.new(0, 500, 0, 27)
+					ChangeLogTitle.FontFace = Font.fromId(12187365977,Enum.FontWeight.Bold)
+					ChangeLogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+					ChangeLogTitle.TextSize = 15.000
+					ChangeLogTitle.TextTransparency = 0
+					ChangeLogTitle.TextWrapped = true
+					ChangeLogTitle.TextXAlignment = Enum.TextXAlignment.Left
+					ChangeLogTitle.Text = Title
+
+                    local LogsFrame = Instance.new("Frame",FrameLogs)
+                    LogsFrame.Name = "Xercuxis"
+                    LogsFrame.Active = true
+                    LogsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+                    LogsFrame.BackgroundTransparency = 0.500
+                    LogsFrame.Position = UDim2.new(0.764, 0, 0.567, 0)
+                    LogsFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+                    LogsFrame.Size = UDim2.new(0, 178, 0, 127)
+                    LogsFrame.ClipsDescendants = true
+                    LogsFrame.Visible = true
+                    conner(LogsFrame,5)
+
+                    ScrollingUpdatebarUIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                        ScrollingUpdatebar.CanvasSize =  UDim2.new(0, 0, 0,  ScrollingUpdatebarUIListLayout.AbsoluteContentSize.Y + 20)
+                    end)
+
+                    local changelogscrolling = Instance.new("ScrollingFrame")
+                    local changelogscrolling_uilistlayout = Instance.new("UIListLayout")
+                    local changelogscrolling_uipadding = Instance.new("UIPadding")
+
+                    changelogscrolling.Name = "changelogscrolling"
+                    changelogscrolling.Parent = LogsFrame
+                    changelogscrolling.Active = true
+                    changelogscrolling.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    changelogscrolling.BackgroundTransparency = 1.000
+                    changelogscrolling.BorderSizePixel = 0
+                    changelogscrolling.ClipsDescendants = true
+                    changelogscrolling.Position = UDim2.new(0, 0, 0, 0)
+                    changelogscrolling.Size = UDim2.new(1, 0, 1, 0)
+                    changelogscrolling.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+                    changelogscrolling.ScrollBarThickness = 0
+
+                    changelogscrolling_uilistlayout.Name = "changelogscrolling_uilistlayout"
+                    changelogscrolling_uilistlayout.Parent = changelogscrolling
+                    changelogscrolling_uilistlayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+                    changelogscrolling_uipadding.Name = "changelogscrolling_uipadding"
+                    changelogscrolling_uipadding.Parent = changelogscrolling
+                    changelogscrolling_uipadding.PaddingLeft = UDim.new(0, 5)
+                    changelogscrolling_uipadding.PaddingTop = UDim.new(0, 5)
+                    
+                    for i,v in pairs(Logs) do
+                        local LogLabel = Instance.new("TextLabel")
+                        LogLabel.Name = "DropdownTitle"
+                        LogLabel.Parent = changelogscrolling
+                        LogLabel.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+                        LogLabel.BackgroundTransparency = 1.000
+                        LogLabel.Position = UDim2.new(0, 12, 0, 0)
+                        LogLabel.Size = UDim2.new(0, 160, 0, 27)
+                        LogLabel.FontFace = Font.fromId(12187365977)
+                        LogLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        LogLabel.TextSize = 12.500
+                        LogLabel.TextTransparency = 0
+                        LogLabel.TextWrapped = true
+                        LogLabel.TextXAlignment = Enum.TextXAlignment.Left
+                        LogLabel.Text = v
+                        LogLabel.RichText = true
+                    end
+                    return raphael
+                end
 
 				function libcreatefunction:MultiDropdown(options)
 					local TitleDropdown = options.Title or "MULTIDROPDOWN"
@@ -1124,15 +1336,32 @@ mainlib.window = function(options)
 					end)
 
 					for i,v in pairs(Item) do
+						local ButtonFrameDropdown = Instance.new("Frame")
+
+						ButtonFrameDropdown.Name = "BtnFrameDropdown"
+						ButtonFrameDropdown.Parent = ScrollingDropdown
+                        ButtonFrameDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+						ButtonFrameDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonFrameDropdown.BackgroundTransparency = 0.000
+						ButtonFrameDropdown.Size = UDim2.new(0, 170, 0, 20)
+                        conner(ButtonFrameDropdown,5)
+                        local ButtonFrameDropdownStroke = zen:create("UIStroke",{
+                            Thickness = 1,
+                            LineJoinMode = Enum.LineJoinMode.Round,
+                            Color = Color3.fromRGB(233,233,233),
+                            Transparency = 0.85
+                        })
+                        ButtonFrameDropdownStroke.Parent = ButtonFrameDropdown   
 						local ButtonDropdown = Instance.new("TextButton")
 
 						ButtonDropdown.Name = "ButtonDropdown"
-						ButtonDropdown.Parent = ScrollingDropdown
-                        ButtonDropdown.AnchorPoint = Vector2.new(0.5,0,0.5,0)
+						ButtonDropdown.Parent = ButtonFrameDropdown
+                        ButtonDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+                        ButtonDropdown.Position = UDim2.new(0.5, 0, 0.5, 0)
 						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
-						ButtonDropdown.BackgroundTransparency = 0.000
+						ButtonDropdown.BackgroundTransparency = 1
 						ButtonDropdown.BorderSizePixel = 0
-						ButtonDropdown.Size = UDim2.new(0, 183, 0, 20)
+						ButtonDropdown.Size = UDim2.new(1, 0, 1, 0)
 						ButtonDropdown.Font = Enum.Font.GothamBold
 						ButtonDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 						ButtonDropdown.TextSize = 12.000
@@ -1143,12 +1372,14 @@ mainlib.window = function(options)
 							if tablefound(MultiDropdown,v) == false then
 								table.insert(MultiDropdown,v)
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
+                                tween(ButtonFrameDropdownStroke,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 							else
 								for ine,va in pairs(MultiDropdown) do
 									if va == v then
 										table.remove(MultiDropdown,ine)
 									end
 								end
+                                tween(ButtonFrameDropdownStroke,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 							end
 							DropdownItem.Text = tostring(table.concat(MultiDropdown,","))
@@ -1168,17 +1399,37 @@ mainlib.window = function(options)
 							if v:IsA("TextButton") then
 								v:Destroy()
 							end
+							if v:IsA("Frame") then
+								v:Destroy()
+							end
 						end
 					end
 					function DropdownFunctions:Add(v)
+						local ButtonFrameDropdown = Instance.new("Frame")
+
+						ButtonFrameDropdown.Name = "BtnFrameDropdown"
+						ButtonFrameDropdown.Parent = ScrollingDropdown
+                        ButtonFrameDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+						ButtonFrameDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonFrameDropdown.BackgroundTransparency = 0.000
+						ButtonFrameDropdown.Size = UDim2.new(0, 170, 0, 20)
+                        conner(ButtonFrameDropdown,5)
+                        local ButtonFrameDropdownStroke = zen:create("UIStroke",{
+                            Thickness = 1,
+                            LineJoinMode = Enum.LineJoinMode.Round,
+                            Color = Color3.fromRGB(233,233,233),
+                            Transparency = 0.85
+                        })
 						local ButtonDropdown = Instance.new("TextButton")
 
 						ButtonDropdown.Name = "ButtonDropdown"
-						ButtonDropdown.Parent = ScrollingDropdown
-						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-						ButtonDropdown.BackgroundTransparency = 1.000
+						ButtonDropdown.Parent = ButtonFrameDropdown
+                        ButtonDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+                        ButtonDropdown.Position = UDim2.new(0.5, 0, 0.5, 0)
+						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonDropdown.BackgroundTransparency = 1
 						ButtonDropdown.BorderSizePixel = 0
-						ButtonDropdown.Size = UDim2.new(0, 183, 0, 20)
+						ButtonDropdown.Size = UDim2.new(1, 0, 1, 0)
 						ButtonDropdown.Font = Enum.Font.GothamBold
 						ButtonDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 						ButtonDropdown.TextSize = 12.000
@@ -1188,6 +1439,7 @@ mainlib.window = function(options)
 						ButtonDropdown.MouseButton1Down:Connect(function()
 							if tablefound(MultiDropdown,v) == false then
 								table.insert(MultiDropdown,v)
+                                tween(ButtonFrameDropdownStroke,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							else
 								for ine,va in pairs(MultiDropdown) do
@@ -1195,6 +1447,7 @@ mainlib.window = function(options)
 										table.remove(MultiDropdown,ine)
 									end
 								end
+                                tween(ButtonFrameDropdownStroke,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 							end
 							DropdownItem.Text = tostring(table.concat(MultiDropdown,","))
@@ -1334,25 +1587,45 @@ mainlib.window = function(options)
 					end)
 
 					for i,v in pairs(Item) do
+						local ButtonFrameDropdown = Instance.new("Frame")
+
+						ButtonFrameDropdown.Name = "BtnFrameDropdown"
+						ButtonFrameDropdown.Parent = ScrollingDropdown
+                        ButtonFrameDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+						ButtonFrameDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonFrameDropdown.BackgroundTransparency = 0.000
+						ButtonFrameDropdown.Size = UDim2.new(0, 170, 0, 20)
+                        conner(ButtonFrameDropdown,5)
+                        local ButtonFrameDropdownStroke = zen:create("UIStroke",{
+                            Thickness = 1,
+                            LineJoinMode = Enum.LineJoinMode.Round,
+                            Color = Color3.fromRGB(233,233,233),
+                            Transparency = 0.85
+                        })
 						local ButtonDropdown = Instance.new("TextButton")
 
 						ButtonDropdown.Name = "ButtonDropdown"
-						ButtonDropdown.Parent = ScrollingDropdown
-						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-						ButtonDropdown.BackgroundTransparency = 1.000
+						ButtonDropdown.Parent = ButtonFrameDropdown
+                        ButtonDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+                        ButtonDropdown.Position = UDim2.new(0.5, 0, 0.5, 0)
+						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonDropdown.BackgroundTransparency = 1
 						ButtonDropdown.BorderSizePixel = 0
-						ButtonDropdown.Size = UDim2.new(0, 183, 0, 20)
+						ButtonDropdown.Size = UDim2.new(1, 0, 1, 0)
 						ButtonDropdown.Font = Enum.Font.GothamBold
 						ButtonDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 						ButtonDropdown.TextSize = 12.000
 						ButtonDropdown.TextTransparency = 0.450
 						ButtonDropdown.Text = tostring(v)
-
 						if Default == v then
 							for i ,v in next , ScrollingDropdown:GetChildren() do
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
+                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
+                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
+                                end
+                                tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.45})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
 							callback(v)
@@ -1365,6 +1638,10 @@ mainlib.window = function(options)
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
+                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
+                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
+                                end
+                                tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
 							callback(v)
@@ -1383,17 +1660,37 @@ mainlib.window = function(options)
 							if v:IsA("TextButton") then
 								v:Destroy()
 							end
+							if v:IsA("Frame") then
+								v:Destroy()
+							end
 						end
 					end
 					function DropdownFunc:Add(v)
+						local ButtonFrameDropdown = Instance.new("Frame")
+
+						ButtonFrameDropdown.Name = "BtnFrameDropdown"
+						ButtonFrameDropdown.Parent = ScrollingDropdown
+                        ButtonFrameDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+						ButtonFrameDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonFrameDropdown.BackgroundTransparency = 0.000
+						ButtonFrameDropdown.Size = UDim2.new(0, 170, 0, 20)
+                        conner(ButtonFrameDropdown,5)
+                        local ButtonFrameDropdownStroke = zen:create("UIStroke",{
+                            Thickness = 1,
+                            LineJoinMode = Enum.LineJoinMode.Round,
+                            Color = Color3.fromRGB(233,233,233),
+                            Transparency = 0.85
+                        })
 						local ButtonDropdown = Instance.new("TextButton")
 
 						ButtonDropdown.Name = "ButtonDropdown"
-						ButtonDropdown.Parent = ScrollingDropdown
-						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-						ButtonDropdown.BackgroundTransparency = 1.000
+						ButtonDropdown.Parent = ButtonFrameDropdown
+                        ButtonDropdown.AnchorPoint = Vector2.new(0.5,0.5)
+                        ButtonDropdown.Position = UDim2.new(0.5, 0, 0.5, 0)
+						ButtonDropdown.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+						ButtonDropdown.BackgroundTransparency = 1
 						ButtonDropdown.BorderSizePixel = 0
-						ButtonDropdown.Size = UDim2.new(0, 183, 0, 20)
+						ButtonDropdown.Size = UDim2.new(1, 0, 1, 0)
 						ButtonDropdown.Font = Enum.Font.GothamBold
 						ButtonDropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 						ButtonDropdown.TextSize = 12.000
@@ -1406,6 +1703,10 @@ mainlib.window = function(options)
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
+                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
+                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
+                                end
+                                tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
 							callback(v)
@@ -1511,7 +1812,7 @@ mainlib.window = function(options)
 						Button.MouseButton1Down:Connect(function()
 							Button.TextSize = 0
 							tween(Button,0.2,Enum.EasingStyle.Back,{TextSize = 12})
-							CircleAnim(Button,getgenv().InterfaceSett["1"]["Ui Color"],getgenv().InterfaceSett["1"]["Ui Color"])
+							CircleAnim(Button,Color3.fromRGB(233,233,233),Color3.fromRGB(233,233,233))
 							pcall(callback)
 						end)
 
@@ -1546,6 +1847,7 @@ mainlib.window = function(options)
 						local ButtonRefresh = {}
 
 						Button.MouseButton1Down:Connect(function()
+                            CircleAnim(Button,Color3.fromRGB(233,233,233),Color3.fromRGB(233,233,233))
 							if Buttonfocus == false then
 								tween(ButtonFrame,0.25,Enum.EasingStyle.Quart,{BackgroundColor3 = Color3.fromRGB(85, 170, 127)})
 								tween(Button,0.25,Enum.EasingStyle.Quart,{TextTransparency = 0})
@@ -1876,6 +2178,7 @@ mainlib.window = function(options)
 					ToggleFrame.Active = true
 					ToggleFrame.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
 					ToggleFrame.Size = UDim2.new(0, 192, 0, 30)
+                    ToggleFrame.ClipsDescendants = true
 
 					ToggleFrameUICorner.CornerRadius = UDim.new(0, 4)
 					ToggleFrameUICorner.Name = "ToggleFrameUICorner"
@@ -1935,6 +2238,7 @@ mainlib.window = function(options)
 					local Togglefocus = false
 
 					ToggleButton.MouseButton1Down:Connect(function()
+                        CircleAnim(ToggleFrame,Color3.fromRGB(233,233,233),Color3.fromRGB(233,233,233))
 						if Togglefocus == false then
 							tween(ToggleInner2,0.3,Enum.EasingStyle.Quart,{Position = UDim2.new(0.735, 0, 0.5, 0)})
 							tween(ToggleInner2,0.1,Enum.EasingStyle.Quart,{Size = UDim2.new(0, 30, 0, 16)})
