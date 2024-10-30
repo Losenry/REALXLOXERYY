@@ -1,3 +1,5 @@
+--#1
+
 -- Check game loadded 
 repeat wait()
 until game:IsLoaded()
@@ -329,24 +331,14 @@ mainlib.window = function(options)
     conner(seraph.LogoCloseOpen,5)
     stroke(seraph.LogoCloseOpen,0,1,Color3.fromRGB(213, 192, 255))
 
-    seraph.Mainsceen0 = zen:create("Frame",{
+    seraph.Mainsceen = zen:create("Frame",{
         AnchorPoint = Vector2.new(0.5, 0.5),
         BackgroundColor3 = getgenv().InterfaceSett["1"]["BackGround_Main"] ,
         BorderSizePixel = 0,
         Position = UDim2.new(0.5, 0, 0.5, 0),
         Size = UDim2.new(0,573,0,363),
         ClipsDescendants = true , 
-    }) seraph.Mainsceen0.Parent = seraph.screen
-    conner(seraph.Mainsceen0,5)
-
-    seraph.Mainsceen = zen:create("Frame",{
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        BackgroundColor3 = getgenv().InterfaceSett["1"]["BackGround_Main"] ,
-        BorderSizePixel = 0,
-        Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(1,0,1,0),
-        ClipsDescendants = true , 
-    }) seraph.Mainsceen.Parent = seraph.Mainsceen0
+    }) seraph.Mainsceen.Parent = seraph.screen
     conner(seraph.Mainsceen,5)
 
     local library = {toggledui = false;}
@@ -372,7 +364,7 @@ mainlib.window = function(options)
             Size = UDim2.new(0,573,0,363),
             ClipsDescendants = true , 
             ZIndex  = 4,
-        }) seraph.LoadScreen.Parent = seraph.Mainsceen0
+        }) seraph.LoadScreen.Parent = seraph.Mainsceen
         conner(seraph.LoadScreen,5)
 
         seraph.InFrameLoad = zen:create("Frame",{
@@ -638,11 +630,12 @@ mainlib.window = function(options)
         return true
     end
     local iris 
-    if getgenv().SeraphZen.SkipLoader or getgenv().InterfaceSett["1"]["Developer Mode"] then
+    if getgenv().SeraphZen["Skip Loader"] or getgenv().InterfaceSett["1"]["Developer Mode"] then
         iris = true
     else
         iris = aleonor.loader()
     end
+
     local adreno = {};
     local raphael = {}
     raphael.main = function()
@@ -970,7 +963,6 @@ mainlib.window = function(options)
             Page.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             Page.Size = UDim2.new(0, 202, 0, 60)
             Page.ClipsDescendants = true
-            Page.ZIndex = 13
             local PageStroke = Instance.new("UIStroke")
 
             PageStroke.Parent = Page
@@ -1983,7 +1975,7 @@ mainlib.window = function(options)
 			end
 			return libpagecreate
 		end
-	MakeDraggable(seraph.Mainsceen0,seraph.Mainsceen0)
+	MakeDraggable(seraph.Mainsceen,seraph.Mainsceen)
 	return libtabcreate
 end
 return mainlib
