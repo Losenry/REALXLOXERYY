@@ -30,6 +30,8 @@ function check_today_special_day()
         ["19/08"] = "World Photography Day 📸",
         ["21/09"] = "International Day of Peace 🕊️",
         ["04/10"] = "World Animal Day 🐾",
+        ["22/10"] = "The Founder Day of Seraphic Hub💫",
+        ["28/10"] = "Official Release Day of Seraphic Hub💜",
     }
 
     local date_key = string.format("%02d/%02d", day, month)
