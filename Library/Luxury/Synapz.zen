@@ -1,4 +1,4 @@
--- #3
+--#4
 
 -- Check game loadded 
 repeat wait()
@@ -783,6 +783,188 @@ mainlib.window = function(options)
     end
     local libtabcreate = {}
 
+    libtabcreate.updatelog = function(options)
+        gameId = options.ID or game.PlaceId or game.GameId
+        Title = options.Title
+        Logs = options.Info or {}
+
+        General.Name = "Xercuxis"
+        General.Parent = Main2
+        General.Active = true
+        General.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        General.BackgroundTransparency = 0.500
+        General.Position = UDim2.new(0.5, 0, 0.5, 0)
+        General.AnchorPoint = Vector2.new(0.5, 0.5)
+        General.Size = UDim2.new(1, 0, 1, 0)
+        General.ClipsDescendants = true
+        General.Visible = true
+        conner(General,5)
+
+        ScrollingUpdatebar.Name = "Scrollingbar"
+        ScrollingUpdatebar.Parent = General
+        ScrollingUpdatebar.Active = true
+        ScrollingUpdatebar.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+        ScrollingUpdatebar.BackgroundTransparency = 1.000
+        ScrollingUpdatebar.BorderSizePixel = 0
+        ScrollingUpdatebar.Size = UDim2.new(1, 0, 1, 0)
+        ScrollingUpdatebar.ScrollBarThickness = 0
+
+        ScrollingUpdatebarUIListLayout.Name = "ScrollingbarUIListLayout"
+        ScrollingUpdatebarUIListLayout.Parent = ScrollingUpdatebar
+        -- ScrollingUpdatebarUIListLayout.FillDirection = Enum.FillDirection.Horizontal
+        ScrollingUpdatebarUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        -- ScrollingUpdatebarUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        ScrollingUpdatebarUIListLayout.Padding = UDim.new(0, 5)
+
+        ScrollingUpdatebarUIPadding.Name = "ScrollingbarUIPadding"
+        ScrollingUpdatebarUIPadding.Parent = ScrollingUpdatebar
+        ScrollingUpdatebarUIPadding.PaddingLeft = UDim.new(0, 10)
+        ScrollingUpdatebarUIPadding.PaddingTop = UDim.new(0, 10)
+
+        local FrameLogs = Instance.new("ImageLabel")
+        FrameLogs.Name = "Xercuxis"
+        FrameLogs.Parent = ScrollingUpdatebar
+        FrameLogs.Active = true
+        FrameLogs.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        FrameLogs.BackgroundTransparency = 0.500
+        FrameLogs.Position = UDim2.new(0.5, 0, 0.5, 0)
+        FrameLogs.AnchorPoint = Vector2.new(0.5, 0.5)
+        FrameLogs.Size = UDim2.new(0, 500, 0, 170)
+        FrameLogs.ClipsDescendants = true
+        
+        conner(FrameLogs,5)
+        stroke(FrameLogs, 0.75, 1, Color3.fromRGB(233,233,233))
+        local GameImage = Instance.new("ImageLabel")
+        GameImage.Name = "Arrow"
+        GameImage.Parent = FrameLogs
+        GameImage.Active = true
+        GameImage.AnchorPoint = Vector2.new(0.5, 0.5)
+        GameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        GameImage.BackgroundTransparency = 0.500
+        GameImage.Position = UDim2.new(0.112, 0, 0.33, 0)
+        GameImage.Size = UDim2.new(0, 100, 0, 100)
+        GameImage.Image = "http://www.roblox.com/asset/?id="
+        GameImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
+        GameImage.ImageTransparency = 0
+        conner(GameImage,5)
+        IrisGetImage(GameImage,gameId)
+
+        local GameTitle = Instance.new("TextLabel")
+        GameTitle.Name = "DropdownTitle"
+        GameTitle.Parent = FrameLogs
+        GameTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+        GameTitle.BackgroundTransparency = 1.000
+        GameTitle.Position = UDim2.new(0.0114, 0, 0.65, 0)
+        GameTitle.Size = UDim2.new(0, 500, 0, 27)
+        GameTitle.Font = Enum.Font.GothamBold
+        GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        GameTitle.TextSize = 14.000
+        GameTitle.TextTransparency = 0
+        GameTitle.TextWrapped = true
+        GameTitle.TextXAlignment = Enum.TextXAlignment.Left
+        GameTitle.Text = tostring(game:GetService("MarketplaceService"):GetProductInfo(gameId).Name)
+
+        local GameVersion = Instance.new("TextLabel")
+        GameVersion.Name = "DropdownTitle"
+        GameVersion.Parent = FrameLogs
+        GameVersion.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+        GameVersion.BackgroundTransparency = 1.000
+        GameVersion.Position = UDim2.new(0.0114, 0, 0.8, 0)
+        GameVersion.Size = UDim2.new(0, 500, 0, 27)
+        GameVersion.FontFace = Font.fromId(12187365977)
+        GameVersion.TextColor3 = Color3.fromRGB(255, 255, 255)
+        GameVersion.TextSize = 14.000
+        GameVersion.TextTransparency = 0.450
+        GameVersion.TextWrapped = true
+        GameVersion.TextXAlignment = Enum.TextXAlignment.Left
+        GameVersion.Text = "Version : "..game:GetService("MarketplaceService"):GetProductInfo(gameId).Updated
+
+        local LineGame = Instance.new("Frame")
+
+        LineGame.Name = "LineFrame"
+        LineGame.Parent = FrameLogs
+        LineGame.Active = true
+        LineGame.Position = UDim2.new(0.56, 0, 0.067, 0)
+        LineGame.BackgroundColor3 = getgenv().InterfaceSett["1"]["Ui Color"]
+        LineGame.BorderSizePixel = 0
+        LineGame.Size = UDim2.new(0, 1, 0, 150)
+
+        local ChangeLogTitle = Instance.new("TextLabel")
+        ChangeLogTitle.Name = "DropdownTitle"
+        ChangeLogTitle.Parent = FrameLogs
+        ChangeLogTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+        ChangeLogTitle.BackgroundTransparency = 1.000
+        ChangeLogTitle.Position = UDim2.new(0.59, 0, 0.043, 0)
+        ChangeLogTitle.Size = UDim2.new(0, 500, 0, 27)
+        ChangeLogTitle.FontFace = Font.fromId(12187365977,Enum.FontWeight.Bold)
+        ChangeLogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ChangeLogTitle.TextSize = 15.000
+        ChangeLogTitle.TextTransparency = 0
+        ChangeLogTitle.TextWrapped = true
+        ChangeLogTitle.TextXAlignment = Enum.TextXAlignment.Left
+        ChangeLogTitle.Text = Title
+
+        local LogsFrame = Instance.new("Frame",FrameLogs)
+        LogsFrame.Name = "Xercuxis"
+        LogsFrame.Active = true
+        LogsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        LogsFrame.BackgroundTransparency = 0.500
+        LogsFrame.Position = UDim2.new(0.764, 0, 0.567, 0)
+        LogsFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+        LogsFrame.Size = UDim2.new(0, 178, 0, 127)
+        LogsFrame.ClipsDescendants = true
+        LogsFrame.Visible = true
+        conner(LogsFrame,5)
+
+        ScrollingUpdatebarUIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            ScrollingUpdatebar.CanvasSize =  UDim2.new(0, 0, 0,  ScrollingUpdatebarUIListLayout.AbsoluteContentSize.Y + 20)
+        end)
+
+        local changelogscrolling = Instance.new("ScrollingFrame")
+        local changelogscrolling_uilistlayout = Instance.new("UIListLayout")
+        local changelogscrolling_uipadding = Instance.new("UIPadding")
+
+        changelogscrolling.Name = "changelogscrolling"
+        changelogscrolling.Parent = LogsFrame
+        changelogscrolling.Active = true
+        changelogscrolling.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        changelogscrolling.BackgroundTransparency = 1.000
+        changelogscrolling.BorderSizePixel = 0
+        changelogscrolling.ClipsDescendants = true
+        changelogscrolling.Position = UDim2.new(0, 0, 0, 0)
+        changelogscrolling.Size = UDim2.new(1, 0, 1, 0)
+        changelogscrolling.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+        changelogscrolling.ScrollBarThickness = 0
+
+        changelogscrolling_uilistlayout.Name = "changelogscrolling_uilistlayout"
+        changelogscrolling_uilistlayout.Parent = changelogscrolling
+        changelogscrolling_uilistlayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+        changelogscrolling_uipadding.Name = "changelogscrolling_uipadding"
+        changelogscrolling_uipadding.Parent = changelogscrolling
+        changelogscrolling_uipadding.PaddingLeft = UDim.new(0, 5)
+        changelogscrolling_uipadding.PaddingTop = UDim.new(0, 5)
+        
+        for i,v in pairs(Logs) do
+            local LogLabel = Instance.new("TextLabel")
+            LogLabel.Name = "DropdownTitle"
+            LogLabel.Parent = changelogscrolling
+            LogLabel.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+            LogLabel.BackgroundTransparency = 1.000
+            LogLabel.Position = UDim2.new(0, 12, 0, 0)
+            LogLabel.Size = UDim2.new(0, 160, 0, 27)
+            LogLabel.FontFace = Font.fromId(12187365977)
+            LogLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            LogLabel.TextSize = 12.500
+            LogLabel.TextTransparency = 0
+            LogLabel.TextWrapped = true
+            LogLabel.TextXAlignment = Enum.TextXAlignment.Left
+            LogLabel.Text = v
+            LogLabel.RichText = true
+        end
+        return raphael
+    end
+        
     function libtabcreate:CreateTab(options)
 
         local name = tostring(math.random(0,9999))
@@ -1026,187 +1208,6 @@ mainlib.window = function(options)
                 end)
             end)
         	local libcreatefunction = {}
-                libcreatefunction.updatelog = function(options)
-                    gameId = options.ID or game.PlaceId or game.GameId
-                    Title = options.Title
-                    Logs = options.Info or {}
-
-                    General.Name = "Xercuxis"
-                    General.Parent = Main2
-                    General.Active = true
-                    General.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-                    General.BackgroundTransparency = 0.500
-                    General.Position = UDim2.new(0.5, 0, 0.5, 0)
-                    General.AnchorPoint = Vector2.new(0.5, 0.5)
-                    General.Size = UDim2.new(1, 0, 1, 0)
-                    General.ClipsDescendants = true
-                    General.Visible = true
-                    conner(General,5)
-
-                    ScrollingUpdatebar.Name = "Scrollingbar"
-                    ScrollingUpdatebar.Parent = General
-                    ScrollingUpdatebar.Active = true
-                    ScrollingUpdatebar.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-                    ScrollingUpdatebar.BackgroundTransparency = 1.000
-                    ScrollingUpdatebar.BorderSizePixel = 0
-                    ScrollingUpdatebar.Size = UDim2.new(1, 0, 1, 0)
-                    ScrollingUpdatebar.ScrollBarThickness = 0
-
-                    ScrollingUpdatebarUIListLayout.Name = "ScrollingbarUIListLayout"
-                    ScrollingUpdatebarUIListLayout.Parent = ScrollingUpdatebar
-                    -- ScrollingUpdatebarUIListLayout.FillDirection = Enum.FillDirection.Horizontal
-                    ScrollingUpdatebarUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-                    -- ScrollingUpdatebarUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-                    ScrollingUpdatebarUIListLayout.Padding = UDim.new(0, 5)
-
-                    ScrollingUpdatebarUIPadding.Name = "ScrollingbarUIPadding"
-                    ScrollingUpdatebarUIPadding.Parent = ScrollingUpdatebar
-                    ScrollingUpdatebarUIPadding.PaddingLeft = UDim.new(0, 10)
-                    ScrollingUpdatebarUIPadding.PaddingTop = UDim.new(0, 10)
-
-                    local FrameLogs = Instance.new("ImageLabel")
-                    FrameLogs.Name = "Xercuxis"
-                    FrameLogs.Parent = ScrollingUpdatebar
-                    FrameLogs.Active = true
-                    FrameLogs.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-                    FrameLogs.BackgroundTransparency = 0.500
-                    FrameLogs.Position = UDim2.new(0.5, 0, 0.5, 0)
-                    FrameLogs.AnchorPoint = Vector2.new(0.5, 0.5)
-                    FrameLogs.Size = UDim2.new(0, 500, 0, 170)
-                    FrameLogs.ClipsDescendants = true
-                    
-                    conner(FrameLogs,5)
-                    stroke(FrameLogs, 0.75, 1, Color3.fromRGB(233,233,233))
-                    local GameImage = Instance.new("ImageLabel")
-                    GameImage.Name = "Arrow"
-                    GameImage.Parent = FrameLogs
-                    GameImage.Active = true
-                    GameImage.AnchorPoint = Vector2.new(0.5, 0.5)
-                    GameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                    GameImage.BackgroundTransparency = 0.500
-                    GameImage.Position = UDim2.new(0.112, 0, 0.33, 0)
-                    GameImage.Size = UDim2.new(0, 100, 0, 100)
-                    GameImage.Image = "http://www.roblox.com/asset/?id="
-                    GameImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
-                    GameImage.ImageTransparency = 0
-                    conner(GameImage,5)
-                    IrisGetImage(GameImage,gameId)
-
-                    local GameTitle = Instance.new("TextLabel")
-					GameTitle.Name = "DropdownTitle"
-					GameTitle.Parent = FrameLogs
-					GameTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-					GameTitle.BackgroundTransparency = 1.000
-					GameTitle.Position = UDim2.new(0.0114, 0, 0.65, 0)
-					GameTitle.Size = UDim2.new(0, 500, 0, 27)
-					GameTitle.Font = Enum.Font.GothamBold
-					GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-					GameTitle.TextSize = 14.000
-					GameTitle.TextTransparency = 0
-					GameTitle.TextWrapped = true
-					GameTitle.TextXAlignment = Enum.TextXAlignment.Left
-					GameTitle.Text = tostring(game:GetService("MarketplaceService"):GetProductInfo(gameId).Name)
-
-                    local GameVersion = Instance.new("TextLabel")
-					GameVersion.Name = "DropdownTitle"
-					GameVersion.Parent = FrameLogs
-					GameVersion.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-					GameVersion.BackgroundTransparency = 1.000
-					GameVersion.Position = UDim2.new(0.0114, 0, 0.8, 0)
-					GameVersion.Size = UDim2.new(0, 500, 0, 27)
-					GameVersion.FontFace = Font.fromId(12187365977)
-					GameVersion.TextColor3 = Color3.fromRGB(255, 255, 255)
-					GameVersion.TextSize = 14.000
-					GameVersion.TextTransparency = 0.450
-					GameVersion.TextWrapped = true
-					GameVersion.TextXAlignment = Enum.TextXAlignment.Left
-					GameVersion.Text = "Version : "..game:GetService("MarketplaceService"):GetProductInfo(gameId).Updated
-
-					local LineGame = Instance.new("Frame")
-
-					LineGame.Name = "LineFrame"
-					LineGame.Parent = FrameLogs
-					LineGame.Active = true
-                    LineGame.Position = UDim2.new(0.56, 0, 0.067, 0)
-					LineGame.BackgroundColor3 = getgenv().InterfaceSett["1"]["Ui Color"]
-					LineGame.BorderSizePixel = 0
-					LineGame.Size = UDim2.new(0, 1, 0, 150)
-
-                    local ChangeLogTitle = Instance.new("TextLabel")
-					ChangeLogTitle.Name = "DropdownTitle"
-					ChangeLogTitle.Parent = FrameLogs
-					ChangeLogTitle.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-					ChangeLogTitle.BackgroundTransparency = 1.000
-					ChangeLogTitle.Position = UDim2.new(0.59, 0, 0.043, 0)
-					ChangeLogTitle.Size = UDim2.new(0, 500, 0, 27)
-					ChangeLogTitle.FontFace = Font.fromId(12187365977,Enum.FontWeight.Bold)
-					ChangeLogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-					ChangeLogTitle.TextSize = 15.000
-					ChangeLogTitle.TextTransparency = 0
-					ChangeLogTitle.TextWrapped = true
-					ChangeLogTitle.TextXAlignment = Enum.TextXAlignment.Left
-					ChangeLogTitle.Text = Title
-
-                    local LogsFrame = Instance.new("Frame",FrameLogs)
-                    LogsFrame.Name = "Xercuxis"
-                    LogsFrame.Active = true
-                    LogsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-                    LogsFrame.BackgroundTransparency = 0.500
-                    LogsFrame.Position = UDim2.new(0.764, 0, 0.567, 0)
-                    LogsFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-                    LogsFrame.Size = UDim2.new(0, 178, 0, 127)
-                    LogsFrame.ClipsDescendants = true
-                    LogsFrame.Visible = true
-                    conner(LogsFrame,5)
-
-                    ScrollingUpdatebarUIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-                        ScrollingUpdatebar.CanvasSize =  UDim2.new(0, 0, 0,  ScrollingUpdatebarUIListLayout.AbsoluteContentSize.Y + 20)
-                    end)
-
-                    local changelogscrolling = Instance.new("ScrollingFrame")
-                    local changelogscrolling_uilistlayout = Instance.new("UIListLayout")
-                    local changelogscrolling_uipadding = Instance.new("UIPadding")
-
-                    changelogscrolling.Name = "changelogscrolling"
-                    changelogscrolling.Parent = LogsFrame
-                    changelogscrolling.Active = true
-                    changelogscrolling.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                    changelogscrolling.BackgroundTransparency = 1.000
-                    changelogscrolling.BorderSizePixel = 0
-                    changelogscrolling.ClipsDescendants = true
-                    changelogscrolling.Position = UDim2.new(0, 0, 0, 0)
-                    changelogscrolling.Size = UDim2.new(1, 0, 1, 0)
-                    changelogscrolling.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
-                    changelogscrolling.ScrollBarThickness = 0
-
-                    changelogscrolling_uilistlayout.Name = "changelogscrolling_uilistlayout"
-                    changelogscrolling_uilistlayout.Parent = changelogscrolling
-                    changelogscrolling_uilistlayout.SortOrder = Enum.SortOrder.LayoutOrder
-
-                    changelogscrolling_uipadding.Name = "changelogscrolling_uipadding"
-                    changelogscrolling_uipadding.Parent = changelogscrolling
-                    changelogscrolling_uipadding.PaddingLeft = UDim.new(0, 5)
-                    changelogscrolling_uipadding.PaddingTop = UDim.new(0, 5)
-                    
-                    for i,v in pairs(Logs) do
-                        local LogLabel = Instance.new("TextLabel")
-                        LogLabel.Name = "DropdownTitle"
-                        LogLabel.Parent = changelogscrolling
-                        LogLabel.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
-                        LogLabel.BackgroundTransparency = 1.000
-                        LogLabel.Position = UDim2.new(0, 12, 0, 0)
-                        LogLabel.Size = UDim2.new(0, 160, 0, 27)
-                        LogLabel.FontFace = Font.fromId(12187365977)
-                        LogLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        LogLabel.TextSize = 12.500
-                        LogLabel.TextTransparency = 0
-                        LogLabel.TextWrapped = true
-                        LogLabel.TextXAlignment = Enum.TextXAlignment.Left
-                        LogLabel.Text = v
-                        LogLabel.RichText = true
-                    end
-                    return raphael
-                end
 
 				function libcreatefunction:MultiDropdown(options)
 					local TitleDropdown = options.Title or "MULTIDROPDOWN"
