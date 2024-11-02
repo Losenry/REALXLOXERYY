@@ -1,5 +1,4 @@
---#4.5
-
+-- #5
 -- Check game loadded 
 repeat wait()
 until game:IsLoaded()
@@ -35,6 +34,7 @@ getgenv().InterfaceSett = {
 
 -- check special days
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Library/Luxury/Days.lua", true))()
+
 --input service 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -649,7 +649,7 @@ mainlib.window = function(options)
                 local Raphael = Alice()
                 if Raphael ~= nil then
                     if Raphael:match("N3XT G3NERAT1ON 0F S3RAPH1C SCR1PT") then
-                        warn("Loading Raphael Interface 2.0 [A3R0 - 1.0.2]")
+                        warn("Loading Raphael Interface 2.0 [A3R0 - 1.0.4]")
                         return true
                     else
                         warn("Script Down!")
@@ -776,7 +776,7 @@ mainlib.window = function(options)
     MainScreenLogo.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
     MainScreenLogo.BackgroundTransparency = 1.000
     MainScreenLogo.Position = UDim2.new(0.5, 0, 0.5, 0)
-    MainScreenLogo.Size = UDim2.new(0, 25, 0, 25)
+    MainScreenLogo.Size = UDim2.new(0, 80, 0, 29)
     MainScreenLogo.Image = "http://www.roblox.com/asset/?id="..tonumber(Logo) -- 12095230917
     MainScreenLogo.ScaleType = Enum.ScaleType.Fit
     if MainScreenLogo.Image == "http://www.roblox.com/asset/?id=83231088025993" then
@@ -843,8 +843,8 @@ mainlib.window = function(options)
         GameImage.AnchorPoint = Vector2.new(0.5, 0.5)
         GameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         GameImage.BackgroundTransparency = 0.500
-        GameImage.Position = UDim2.new(0.112, 0, 0.33, 0)
-        GameImage.Size = UDim2.new(0, 100, 0, 100)
+        GameImage.Position = UDim2.new(0.185, 0, 0.33, 0)
+        GameImage.Size = UDim2.new(0, 170, 0, 100)
         GameImage.Image = "http://www.roblox.com/asset/?id="
         GameImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
         GameImage.ImageTransparency = 0
@@ -1537,7 +1537,7 @@ mainlib.window = function(options)
 					DropdownItem.TextTransparency = 0.450
 					DropdownItem.TextWrapped = true
 					DropdownItem.TextXAlignment = Enum.TextXAlignment.Left
-					DropdownItem.Text = ""
+					DropdownItem.Text = "..."
 
 					Arrow.Name = "Arrow"
 					Arrow.Parent = DropdownButton
@@ -1599,12 +1599,6 @@ mainlib.window = function(options)
 						ButtonFrameDropdown.BackgroundTransparency = 0.000
 						ButtonFrameDropdown.Size = UDim2.new(0, 170, 0, 20)
                         conner(ButtonFrameDropdown,5)
-                        local ButtonFrameDropdownStroke = zen:create("UIStroke",{
-                            Thickness = 1,
-                            LineJoinMode = Enum.LineJoinMode.Round,
-                            Color = Color3.fromRGB(233,233,233),
-                            Transparency = 0.85
-                        })
 						local ButtonDropdown = Instance.new("TextButton")
 
 						ButtonDropdown.Name = "ButtonDropdown"
@@ -1625,10 +1619,7 @@ mainlib.window = function(options)
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
-                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
-                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
-                                end
-                                tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.45})
+                                tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
 							callback(v)
@@ -1641,9 +1632,6 @@ mainlib.window = function(options)
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
-                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
-                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
-                                end
                                 tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
@@ -1706,9 +1694,6 @@ mainlib.window = function(options)
 								if v:IsA("TextButton") then
 									tween(v,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0.45})
 								end
-                                if v:IsA("UIStroke") and v.Name == "BtnFrameDropdown" then
-                                    tween(v,0.3,Enum.EasingStyle.Quart,{Transparency = 0.85})
-                                end
                                 tween(ButtonFrameDropdown,0.3,Enum.EasingStyle.Quart,{Transparency = 0.3})
 								tween(ButtonDropdown,0.3,Enum.EasingStyle.Quart,{TextTransparency = 0})
 							end
@@ -1884,7 +1869,7 @@ mainlib.window = function(options)
                     local visualMax = options.Max or 100
                     local visualMin = options.Min or 0
                     local visualDefault = options.Default or 50
-                    local visualcallback = options.callback or function() end
+                    local callback = options.callback or function() end
 
                     local MainSlider = Instance.new("Frame")
                     local UICorner_22 = Instance.new("UICorner")
@@ -1983,7 +1968,7 @@ mainlib.window = function(options)
                     SliderBar_3.BorderSizePixel = 0
                     SliderBar_3.ClipsDescendants = true
                     SliderBar_3.Position = UDim2.new((visualDefault or 0)/visualMax, 0.5, 0.5,0.5, 0)
-                    SliderBar_3.Size = UDim2.new(0, 10, 0, 10)
+                    SliderBar_3.Size = UDim2.new(0, 15, 0, 15)
 
                     UICorner_25.CornerRadius = UDim.new(0, 360)
                     UICorner_25.Parent = SliderBar_3
@@ -2080,14 +2065,15 @@ mainlib.window = function(options)
                         SliderBar_2:TweenSize(UDim2.new((Text_8.Text or 0) / visualMax, 0, 0, 5), "Out", "Sine", 0.2, true)
                         SliderBar_3:TweenPosition(UDim2.new((Text_8.Text or 0)/visualMax, 0,0.5, 0) , "Out", "Sine", 0.2, true)
                         Text_8.Text = tostring(Text_8.Text and math.floor( (Text_8.Text / visualMax) * (visualMax - visualMin) + visualMin) )
-                        pcall(options.callback, Text_8.Text)
+                        pcall(callback,Text_8.Text)
                     end)
 
                     function sliderfunc:Update(value)
                         SliderBar_2:TweenSize(UDim2.new((value or 0) / visualMax, 0, 0, 5), "Out", "Sine", 0.2, true)
                         SliderBar_3:TweenPosition(UDim2.new((value or 0)/visualMax, 0,0.5, 0) , "Out", "Sine", 0.2, true)
                         pcall(function()
-                            pcall(options.callback, Text_8.Text)
+                            pcall(callback)
+                            Text_8.Text = value
                         end)
                     end
                     return sliderfunc
@@ -2138,6 +2124,7 @@ mainlib.window = function(options)
 					TextBox.TextSize = 12.000
 					TextBox.TextTransparency = 0.450
 					TextBox.ClipsDescendants = true
+                    TextBox.Text = Holder
 
 					TextBoxUICorner.CornerRadius = UDim.new(0, 4)
 					TextBoxUICorner.Name = "TextBoxUICorner"
