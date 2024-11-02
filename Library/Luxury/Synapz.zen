@@ -1,4 +1,5 @@
--- #5
+-- #5.1.0
+
 -- Check game loadded 
 repeat wait()
 until game:IsLoaded()
@@ -633,7 +634,7 @@ mainlib.window = function(options)
         return true
     end
     local iris 
-    if getgenv().SeraphZen["Skip Loader"] or getgenv().InterfaceSett["1"]["Developer Mode"] then
+    if getgenv().InterfaceSett["1"]["Developer Mode"] then
         iris = true
     else
         iris = aleonor.loader()
