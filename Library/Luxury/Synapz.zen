@@ -1,4 +1,4 @@
--- #5.1.0
+-- #5.1.2
 
 -- Check game loadded 
 repeat wait()
@@ -646,20 +646,7 @@ mainlib.window = function(options)
         Xercuxis = {};
         adreno.seraph = function()
             if iris then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Api/Raymond/Adelhardt.arc"))();
-                local Raphael = Alice()
-                if Raphael ~= nil then
-                    if Raphael:match("N3XT G3NERAT1ON 0F S3RAPH1C SCR1PT") then
-                        warn("Loading Raphael Interface 2.0 [A3R0 - 1.0.4]")
-                        return true
-                    else
-                        warn("Script Down!")
-                        game.Players.LocalPlayer:Kick("\n A3RO Ui Down")
-                    end
-                else
-                    warn("Security Down!")
-                    game.Players.LocalPlayer:Kick("\n A3RO Ui Down")
-                end
+                return true
             else
                 return warn("failed.")
             end
