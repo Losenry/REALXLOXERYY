@@ -1,5 +1,13 @@
--- check special days #2
+-- check special days #3
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Library/Luxury/Days.lua", true))()
+
+getgenv().InterfaceSett = {
+            ColorSec1 = Color3.fromRGB(134, 126, 180), -- เปลี่ยนพวกสีตรงกรอบ
+            ColorSec2 = Color3.fromRGB(134, 126, 180), -- เปลี่ยนสี toggle logo, slidebar
+            WinBarSec1 = "Seraphic Hub | Premium Script", -- เปลี่ยนชื่อ win menu
+            WinBarDate = 1, -- เปลี่ยนรูปแบบแสดงวัน
+            InterfaceLogo = 83231088025993 -- โลโก้
+        }
 
 local UserInputService = game:GetService("UserInputService")
     local TweenService = game:GetService("TweenService")
@@ -679,7 +687,7 @@ local UserInputService = game:GetService("UserInputService")
                     end)
 							
 					function BunnyGayhod:Update(states)
-						if state then
+						if states then
                             TweenService:Create(
                                 Check,
                                 TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
@@ -702,9 +710,10 @@ local UserInputService = game:GetService("UserInputService")
                                 {TextTransparency = 0.35}
                             ):Play()
 						end
-						istoggled = state
+						istoggled = states
 						pcall(options.callback,istoggled) 
 					end
+                    return BunnyGayhod
                 end
     
                 function main:Title(text)
