@@ -1,4 +1,4 @@
--- check special days
+-- check special days #2
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Library/Luxury/Days.lua", true))()
 
 local UserInputService = game:GetService("UserInputService")
@@ -562,6 +562,7 @@ local UserInputService = game:GetService("UserInputService")
                     end)
                 end
                 function main:AddToggle(name,options)
+					local BunnyGayhod = {}
                     local visualTitle = name or "Toggle"
                     local istoggled = options.Stats or false
                     local visualcallback = options.callback or function() end
@@ -676,6 +677,34 @@ local UserInputService = game:GetService("UserInputService")
                         istoggled = not istoggled
                         pcall(options.callback,istoggled) 
                     end)
+							
+					function BunnyGayhod:Update(states)
+						if state then
+                            TweenService:Create(
+                                Check,
+                                TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                                {Size = UDim2.new(0, 16, 0, 16)}
+                            ):Play()
+                            TweenService:Create(
+                                ToggleTitle,
+                                TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                                {TextTransparency = 0.00}
+                            ):Play()
+						else
+                            TweenService:Create(
+                                Check,
+                                TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                                {Size = UDim2.new(0, 0, 0, 0)}
+                            ):Play()
+                            TweenService:Create(
+                                ToggleTitle,
+                                TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                                {TextTransparency = 0.35}
+                            ):Play()
+						end
+						istoggled = state
+						pcall(options.callback,istoggled) 
+					end
                 end
     
                 function main:Title(text)
