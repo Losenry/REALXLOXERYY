@@ -45,10 +45,26 @@ function check_today_special_day()
     end
 end
 
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua", true))()
+local players = game:GetService("Players")
 local is_special_day, message = check_today_special_day()
 if is_special_day then
-    Notification.new("warning", "Message from Developers", "Happy "..message):deleteTimeout(5)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Seraph.xyz";
+        Text = "Loading Interface..";
+        Icon = "rbxthumb://type=AvatarHeadShot&id=" .. players.LocalPlayer.UserId .. "&w=180&h=180 true";
+        Duration = 5
+    })
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Message From Dev!";
+        Text = "Happy "..message;
+        Icon = "rbxthumb://type=AvatarHeadShot&id=" .. players.LocalPlayer.UserId .. "&w=180&h=180 true";
+        Duration = 5
+    })
 else
-    return ''
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Seraph.xyz";
+        Text = "Loading Interface..";
+        Icon = "rbxthumb://type=AvatarHeadShot&id=" .. players.LocalPlayer.UserId .. "&w=180&h=180 true";
+        Duration = 5
+    })
 end
