@@ -1,0 +1,6 @@
+Seraph = {
+  ["Version"] = "1.3H2 GLOBAL",
+  ["Interface"] = "1.0.4"
+}
+return Seraph
+  
