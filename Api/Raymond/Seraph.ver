@@ -1,6 +1,6 @@
 Seraph = {
   ["Version"] = "1.3H2 BETA DEVELOPER",
-  ["Interface"] = "1.0.4"
+  ["Interface"] = "BETA INTERFACE"
 }
 return Seraph
   
