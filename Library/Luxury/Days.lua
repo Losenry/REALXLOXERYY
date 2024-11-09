@@ -34,6 +34,7 @@ function check_today_special_day()
         -- 2024
         ["22/10"] = "The Founder Day of Seraphic Hub💫",
         ["28/10"] = "Official Release Day of Seraphic Hub💜",
+        ["09/11"] = "The Last Day of Luxury Hub",
     }
 
     local date_key = string.format("%02d/%02d", day, month)
