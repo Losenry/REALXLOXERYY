@@ -1,2 +1,2 @@
 warn("NOW YOU'RE USING SERAPH SCRIPT")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Library/Luxury/Hinutt3.lua",true))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[1].lua",true))();
