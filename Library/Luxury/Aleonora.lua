@@ -1,18 +1,24 @@
 if _G.Scripts_Language == nil or _G.Scripts_Language == "" then
     _G.Scripts_Language = "English"
 end
-task.wait(1.5)
-if not shared.BetaMode then
-    if _G.Scripts_Language == "Thailand" or _G.Scripts_Language == "Thai" then
-        warn("[THAI VERSION]")
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/main/Library/Luxury/Raphael/Thailand.zen"))()
-    elseif _G.Scripts_Language == "English" or _G.Scripts_Language == "Eng" then
-        warn("[ENGLISH VERSION]")
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/main/Library/Luxury/Raphael/International.zen"))()
-    else
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/main/Library/Luxury/Raphael/International.zen"))() 
+
+load = function(url)
+    local Input = nil
+    if url ~= nil then
+        Input = game:HttpGet(url)
+        if Input ~= nil then
+            warn(url)
+            loadstring(Input)();
+        end
     end
-else
-    warn("PROJECT 1.5H1 BETA DEVELOPER\n    CLIENT KEYS: ".._G.Key,"\n    ".."CLIENT IDS: ".._G.DiscordId);
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Losenry/REALXLOXERYY/refs/heads/main/Library/Luxury/Hinutt3.lua"))();
 end
+
+Loader = function(language)
+    if string.find(language,"Thai") or string.find(language,"thai") then
+        load("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[2].lua")
+    elseif string.find(language,"English") or string.find(language,"International") or nil then
+        load("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[1].lua")
+    end
+end
+
+Loader(_G.Scripts_Language)
