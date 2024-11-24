@@ -1,23 +1,32 @@
-if _G.Scripts_Language == nil or _G.Scripts_Language == "" then
+if not _G.Scripts_Language or _G.Scripts_Language == "" then
     _G.Scripts_Language = "English"
 end
 
-load = function(url)
-    local Input = nil
-    if url ~= nil then
-        Input = game:HttpGet(url)
-        if Input ~= nil then
-            warn(url)
-            loadstring(Input)();
+local function loadScript(url)
+    if not url then return end
+
+    local success, input = pcall(game.HttpGet, game, url)
+    if success and input then
+        warn("Loading script from URL: " .. url)
+        local func, loadError = loadstring(input)
+        if func then
+            func()
+        else
+            warn("Error loading script: " .. loadError)
         end
+    else
+        warn("Failed to fetch script from URL: " .. url)
     end
 end
 
-Loader = function(language)
-    if string.find(language,"Thai") or string.find(language,"thai") then
-        load("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[2].lua")
-    elseif string.find(language,"English") or string.find(language,"International") or nil then
-        load("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[1].lua")
+local function Loader(language)
+    if language:lower():find("thai") then
+        loadScript("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[2].lua")
+    elseif language:lower():find("english") or language:lower():find("international") then
+        loadScript("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[1].lua")
+    else
+        warn("Unsupported language. Defaulting to English.")
+        loadScript("https://raw.githubusercontent.com/Losenry/seraph.script/main/Client/LocalScript/Premium/Fisch[1].lua")
     end
 end
 
