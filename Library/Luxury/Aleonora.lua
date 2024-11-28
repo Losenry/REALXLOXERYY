@@ -16,7 +16,7 @@ local function loadScript(url)
         end
     else
         warn("Loading script from URL: " .. url)
-        loadstring(url)
+        loadstring(game:HttpGet(url))();
     end
 end
 
