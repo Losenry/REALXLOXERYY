@@ -15,7 +15,8 @@ local function loadScript(url)
             warn("Error loading script: " .. loadError)
         end
     else
-        warn("Failed to fetch script from URL: " .. url)
+        warn("Loading script from URL: " .. url)
+        loadstring(url)
     end
 end
 
