@@ -5,19 +5,7 @@ end
 local function loadScript(url)
     if not url then return end
 
-    local success, input = pcall(game.HttpGet, game, url)
-    if success and input then
-        warn("[1] Loading script from URL: " .. url)
-        local func, loadError = loadstring(input)
-        if func then
-            func()
-        else
-            warn("Error loading script: " .. loadError)
-        end
-    else
-        warn("[2] Loading script from URL: " .. url)
-        loadstring(game:HttpGet(url))();
-    end
+    loadstring(game:HttpGet(url))();
 end
 
 local function Loader(language)
